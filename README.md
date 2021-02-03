@@ -1,3 +1,3 @@
 # Portfolio Web Page
-A basic React based portfolio using Typescript
+A React based portfolio using Typescript
 
