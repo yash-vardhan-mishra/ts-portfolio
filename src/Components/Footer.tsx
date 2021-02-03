@@ -9,7 +9,7 @@ const Footer = ({ data }: FooterProps) => {
   const networks = social.map(function (network) {
     return (
       <li key={network.name}>
-        <a href={network.url}>
+        <a target="_blank" rel="noopener noreferrer" href={network.url}>
           <i className={network.className}></i>
         </a>
       </li>
@@ -25,7 +25,12 @@ const Footer = ({ data }: FooterProps) => {
           <ul className="copyright">
             <li>
               Made by{" "}
-              <a title="Yash" href="https://yash-vardhan.ml">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Yash"
+                href="https://yash-vardhan.ml"
+              >
                 Yash
               </a>
             </li>

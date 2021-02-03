@@ -46,7 +46,12 @@ const About = ({ data }: AboutProps) => {
             </div>
             <div className="columns download">
               <p>
-                <a href={resumedownload} className="button">
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={resumedownload}
+                  className="button"
+                >
                   <i className="fa fa-download"></i>Download Resume
                 </a>
               </p>

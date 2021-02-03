@@ -8,10 +8,11 @@ interface HeaderProps {
 
 const Header = ({ data }: HeaderProps) => {
   const { name, occupation, description, social, address } = data;
+
   const networks = social.map(function (network) {
     return (
       <li key={network.name}>
-        <a href={network.url}>
+        <a target="_blank" rel="noopener noreferrer" href={network.url}>
           <i className={network.className}></i>
         </a>
       </li>
@@ -67,7 +68,7 @@ const Header = ({ data }: HeaderProps) => {
       <div className="row banner">
         <div className="banner-text">
           <h1 className="responsive-headline">
-            <TypeWriter delay={200} string={name ? `I'm ${name}.` : ""} />
+            <TypeWriter string={name ? `I'm ${name}.` : ""} />
           </h1>
           <h3>
             Based in {address.city}. <span>{occupation}</span>. {description}.

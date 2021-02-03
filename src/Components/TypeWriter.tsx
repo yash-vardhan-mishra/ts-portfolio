@@ -1,51 +1,30 @@
-import { useEffect, useState } from "react";
-import './TypeWriterStyles.css'
+import { useEffect } from "react";
+import Typed from "typed.js";
 
 export interface TypeWriterProps {
   string: string;
-  delay?: number;
-  stopBlinkinOnComplete?: any;
-  className?: string;
-  onComplete: () => void;
-  cursor?: string;
-  cursorClassName?: string;
+  typeSpeed: number;
 }
 
-export function TypeWriter({
-  string,
-  delay = 100,
-  stopBlinkinOnComplete = false,
-  className,
-  onComplete = () => {},
-  cursor = "|",
-  cursorClassName,
-}: TypeWriterProps) {
-  const [text, setText] = useState("");
-  const [pointer, setPointer] = useState(-1);
-  const [isBlinking, setBlinking] = useState(true);
-
+export function TypeWriter({ string, typeSpeed }: TypeWriterProps) {
   useEffect(() => {
-    if (pointer < string.length) {
-      setTimeout(() => {
-        setText(text + string.charAt(pointer));
-        setPointer(pointer + 1);
-      }, delay);
-    } else {
-      if (stopBlinkinOnComplete) setBlinking(false);
-      onComplete();
-    }
-  }, [pointer, delay, onComplete, string, text, stopBlinkinOnComplete]);
+    // Options for the Typed object
+    const options = {
+      strings: [string],
+      typeSpeed: typeSpeed,
+    };
 
-  return (
-    <span className={className}>
-      {text}
-      {isBlinking ? <span className={cursorClassName}>{cursor}</span> : null}
-    </span>
-  );
+    // New Typed instance
+    const typed = new Typed("#instruction", options);
+
+    // Destroy Typed instance on unmounting the component to prevent memory leaks
+    return () => {
+      typed.destroy();
+    };
+  }, [string, typeSpeed]);
+  return <span id="instruction"></span>;
 }
 
 TypeWriter.defaultProps = {
-  stopBlinkinOnComplete: false,
-  onComplete: () => {},
-  cursorClassName: "blinkingCursor",
+  typeSpeed: 120,
 };
